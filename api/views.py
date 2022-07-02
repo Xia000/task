@@ -84,6 +84,7 @@ def logoutHandle(request):
     return redirect("home")
 
 
+# show Api Overview page
 
 @api_view(['GET'])
 def apiOverview(request):
@@ -105,6 +106,7 @@ def apiOverview(request):
     return Response(api_urls)
 
 
+# Show all Products
 
 @api_view(['GET'])
 def productList(request):
@@ -112,6 +114,8 @@ def productList(request):
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
+
+# Show a single Product pass an id of the Product
 @api_view(['GET'])
 def productDetail(request, pk):
     product = Product.objects.get(id=pk)
@@ -119,6 +123,7 @@ def productDetail(request, pk):
     return Response(serializer.data)
 
 
+# Create a new Product
 @api_view(['POST'])
 def addProduct(request):
     serializer = ProductSerializer(data=request.data)
@@ -126,6 +131,7 @@ def addProduct(request):
         serializer.save()
     return Response(serializer.data)
 
+# Update a Product
 @api_view(['POST'])
 def updateProduct(request, pk):
     product = Product.objects.get(id=pk)
@@ -135,6 +141,7 @@ def updateProduct(request, pk):
     return Response(serializer.data)
 
 
+# Delete a Product
 @api_view(['DELETE'])
 def deleteProduct(request, pk):
     product = Product.objects.get(id=pk)
@@ -142,13 +149,14 @@ def deleteProduct(request, pk):
     return Response("Item successfully deleted")
 
 
+# Show all Categories
 @api_view(['GET'])
 def categoryList(request):
     categories = Category.objects.all()
     serializer = CategorySerializer(categories, many=True)
     return Response(serializer.data)
 
-
+# Add a new Category
 @api_view(['POST'])
 def addCategory(request):
     serializer = CategorySerializer(data=request.data)
