@@ -131,7 +131,10 @@ STATICFILES_DIRS = [
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
-
+CORS_ALLOW_ALL_ORIGINS = True
+CROS_ALLOWED_ORIGINS = [
+    'http://localhost:3000' 
+]
 
 
 # Default primary key field type
@@ -143,25 +146,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'knox.auth.TokenAuthentication',
     ],
-}
-
-REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        # 'rest_framework.renderers.BrowsableAPIRenderer',
-    ]
-}
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-        'knox.auth.TokenAuthentication',
+        #  'rest_framework.renderers.BrowsableAPIRenderer',
     ]
 }
 
 
-CROS_ALLOWED_ORIGINS = ['http://localhost:3000/']
+
+
 
  

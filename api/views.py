@@ -170,6 +170,7 @@ def productDetail(request, pk):
 @api_view(['POST'])
 def addProduct(request):
     serializer = ProductSerializer(data=request.data)
+    
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
